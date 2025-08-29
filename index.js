@@ -23,3 +23,21 @@ for (const heart of hearts) {
         document.getElementById('nav-heart').innerText = newCount;
     });
 }
+
+// for copy function
+
+const copys = document.getElementsByClassName('copy-btn');
+
+for (const copy of copys) {
+    copy.addEventListener('click', function () {
+        const cardNumber = this.parentNode.parentNode.children[1].children[2].innerText;
+        navigator.clipboard.writeText(cardNumber);
+        alert(`Number Copied - ${cardNumber}`);
+
+        let copyCount = getInnerTextNumber('nav-copy');
+        let newCount = copyCount + 1;
+
+        document.getElementById('nav-copy').innerText = newCount;
+    })
+}
+
