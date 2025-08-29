@@ -40,4 +40,44 @@ for (const copy of copys) {
         document.getElementById('nav-copy').innerText = newCount;
     })
 }
+// for call button 
 
+const calls = document.getElementsByClassName('call-btn');
+
+for (const call of calls) {
+    call.addEventListener('click', function () {
+        const card = this.parentNode.parentNode;
+        const cardTitle = card.querySelector('p').innerText;
+        const cardNumber = card.querySelector('.copy-num').innerText;
+
+        let navCoin = getInnerTextNumber('nav-coin');
+        if (navCoin < 20) {
+            alert(' ❌ Coin is insufficient!');
+            return;
+        }
+        alert(`📞Calling ${cardTitle} - ${cardNumber}`);
+
+        navCoin -= 20;
+        document.getElementById('nav-coin').innerText = navCoin;
+
+        const cardTitle2 = card.querySelector('h2').innerText;
+        const callHistory = document.getElementById('call-history');
+        const time = new Date().toLocaleTimeString();
+
+        const callDiv = document.createElement('div');
+        callDiv.className = 'flex justify-between items-center p-4 px-7 shadow-md bg-gray-50 text-left gap-3 mt-4 rounded-lg';
+        callDiv.innerHTML = `
+            <h2 class="font-medium">${cardTitle2} <br />${cardNumber}</h2>
+            <p>${time}</p>
+        `;
+        callHistory.appendChild(callDiv);
+    })
+}
+
+// for clear history
+const clearBtn = document.getElementById('clear-btn');
+
+clearBtn.addEventListener('click', function () {
+    const callHistory = document.getElementById('call-history');
+    callHistory.innerHTML = '';
+})
